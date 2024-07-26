@@ -1,48 +1,36 @@
-import { Container , Row , Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Product } from "@components/eCommerce";
 import { useAppDispath, useAppSelector } from "@store/hooks";
 import { useEffect } from "react";
-import { actGetProductsByCatPrefix , productscleanUp } from "@store/Products/productsSlice";
+import {
+  actGetProductsByCatPrefix,
+  productscleanUp,
+} from "@store/Products/productsSlice";
 import { useParams } from "react-router-dom";
-const Products = () =>{
+import { Loading } from "@components/feedback";
+import { GridList } from "@components/common";
+const Products = () => {
   const params = useParams();
   const dispatch = useAppDispath();
-  const {loading , error , records} = useAppSelector(state => state.products)
+  const { loading, error, records } = useAppSelector((state) => state.products);
 
-  
-  useEffect(()=>{
-    
-    dispatch(actGetProductsByCatPrefix(params.prefix as string))
-    
-    return () =>{
+  useEffect(() => {
+    dispatch(actGetProductsByCatPrefix(params.prefix as string));
+
+    return () => {
       dispatch(productscleanUp());
-    }
-  },[dispatch , params])
+    };
+  }, [dispatch, params]);
 
-
-  const productsList =
-  records.length > 0 ? records.map(record => (
-    <Col xs={6} md={3} key={record.id} className="d-flex justify-content-center mb-5 mt-2">
-            <Product {...record} />
-          </Col>
-    )) 
-  
-  : "No categories found";
-
-
-    return(
-      <Container>
-      <Row>
-        {productsList}
-        
-        
-      </Row>
+  return (
+    <Container>
+      <Loading status={loading} error={error}>
+        <GridList
+          records={records}
+          renderItem={(record) => <Product {...record} />}
+        />
+      </Loading>
     </Container>
-
-
-
-        
-
-    );
-}
+  );
+};
 export default Products;
