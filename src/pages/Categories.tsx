@@ -1,17 +1,16 @@
-import { Container, Row, Col } from "react-bootstrap";
 import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@store/hooks";
+import { actGetCategories } from "@store/categories/categoriesSlice";
 import { Category } from "@components/eCommerce";
-import { useAppDispath, useAppSelector } from "@store/hooks";
-import { actGetCategories } from "@store/Categries/categoriesSlice";
+import { GridList, Heading } from "@components/common";
 import { Loading } from "@components/feedback";
-import { GridList } from "@components/common";
-const Categories = () => {
-  const dispatch = useAppDispath();
+import { TCategory } from "@customTypes/category";
 
+const Categories = () => {
+  const dispatch = useAppDispatch();
   const { loading, error, records } = useAppSelector(
     (state) => state.categories
   );
-
   useEffect(() => {
     if (!records.length) {
       dispatch(actGetCategories());
@@ -19,14 +18,16 @@ const Categories = () => {
   }, [dispatch, records]);
 
   return (
-    <Container>
-      <Loading status={loading} error={error}>
-        <GridList
+    <>
+      <Heading>Categories</Heading>
+      <Loading loading={loading} error={error}>
+        <GridList<TCategory>
           records={records}
           renderItem={(record) => <Category {...record} />}
         />
       </Loading>
-    </Container>
+    </>
   );
 };
+
 export default Categories;
