@@ -31,7 +31,7 @@ const Products = () => {
 
   return (
     <>
-      <Loading loading={loading} error={error}>
+      <Loading status={loading} error={error}>
         <GridList<TProduct>
           records={productsFullInfo}
           renderItem={(record) => <Product {...record} />}

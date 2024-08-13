@@ -12,7 +12,7 @@ const Product = memo(({ id, title, price, img, max, quantity }: TProduct) => {
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   const currentRemainingQuantity = max - (quantity ?? 0);
-  const quantityReachedToMax = currentRemainingQuantity <= 0 ? true : false;
+  const quantityReachedToMax = currentRemainingQuantity <= 0;
 
   useEffect(() => {
     if (!isBtnDisabled) {
@@ -31,19 +31,18 @@ const Product = memo(({ id, title, price, img, max, quantity }: TProduct) => {
     setIsBtnDisabled(true);
   };
 
-  // Ensure price is a number before trying to format it
-  const formattedPrice = typeof price === 'number' ? price.toFixed(2) : price;
-
   return (
     <div className={product}>
       <div className={productImg}>
         <img src={img} alt={title} />
       </div>
       <h2>{title}</h2>
-      <h3>{formattedPrice} EGP</h3>
+      <h3>
+        {typeof price === "number" ? price.toFixed(2) : price} EGP
+      </h3>
       <p className={maximumNotice}>
         {quantityReachedToMax
-          ? "You reach to the limit"
+          ? "You reached the limit"
           : `You can add ${currentRemainingQuantity} item(s)`}
       </p>
       <Button
