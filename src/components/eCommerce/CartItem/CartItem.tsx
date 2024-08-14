@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Form, Button } from "react-bootstrap";
-import { TProduct } from "@customTypes/product";
+import { TProduct } from "@types";
 import styles from "./styles.module.css";
 
 const { cartItem, product, productImg, productInfo, cartItemSelection } =
@@ -16,12 +16,16 @@ const CartItem = memo(
     id,
     title,
     img,
-    price,
+    price, // Add a type check
     max,
     quantity,
     changeQuantityHandler,
     removeItemHandler,
   }: CartItemProps) => {
+    if (typeof price !== 'number') {
+      console.log("error ")
+    }
+
     // render option list
     const renderOptions = Array(max)
       .fill(0)
@@ -47,7 +51,7 @@ const CartItem = memo(
           </div>
           <div className={productInfo}>
             <h2>{title}</h2>
-            <h3>{price.toFixed(2)} EGP</h3>
+            <h3>{Number(price).toFixed(2)} EGP</h3> 
             <Button
               variant="secondary"
               style={{ color: "white", width: "100px" }}
