@@ -1,4 +1,13 @@
 {
+  "users": [
+    {
+      "email": "yousef@gmail.com",
+      "password": "$2a$10$hLB.pVIv0q/5OorvF/AMneCZdIE655/oOZmlvUIYAZRH7lsTDblf2",
+      "firstName": "yousef",
+      "lastName": "sabry",
+      "id": 1
+    }
+  ],
   "category": [
     {
       "id": 1,
