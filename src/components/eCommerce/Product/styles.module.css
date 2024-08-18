@@ -1,9 +1,10 @@
 .product {
-  width: 130px;
+  width: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  
 }
 
 .productImg {

@@ -72,7 +72,7 @@ const Product = memo(
           </Modal.Body>
         </Modal>
 
-        <div className={product}>
+        <div  className={product}>
           <div className={wishlistBtn} onClick={likeToggleHandler}>
             {isLoading ? (
               <Spinner animation="border" size="sm" variant="primary" />
@@ -103,7 +103,7 @@ const Product = memo(
                 <Spinner animation="border" size="sm" /> Loading...
               </>
             ) : (
-              "Add to cart"
+              "Addto cart"
             )}
           </Button>
         </div>

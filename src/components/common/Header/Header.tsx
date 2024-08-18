@@ -44,9 +44,9 @@ const Header = () => {
               <Nav.Link as={NavLink} to="categories">
                 Categories
               </Nav.Link>
-              <Nav.Link as={NavLink} to="about-us">
+              {/* <Nav.Link as={NavLink} to="about-us">
                 About
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
             <Nav>
               {!accessToken ? (
@@ -63,10 +63,12 @@ const Header = () => {
                   title={`Welcome: ${user?.firstName} ${user?.lastName}`}
                   id="basic-nav-dropdown"
                 >
-                  <NavDropdown.Item as={NavLink} to="profile">
+                  <NavDropdown.Item as={NavLink} to="profile" end>
                     Profile
                   </NavDropdown.Item>
-                  <NavDropdown.Item>Orders</NavDropdown.Item>
+                  <NavDropdown.Item as={NavLink} to="profile/orders">
+                    Orders
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     as={NavLink}
